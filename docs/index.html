@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; img-src 'self' blob: data:; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>기업 설명회 일정</title><link rel="stylesheet" href="./style.css?v=20260930-4">
+<script defer src="./vendor/xlsx.full.min.js"></script><script defer src="./vendor/jszip.min.js"></script><script defer src="./scheduler.js?v=20260930-5"></script><script defer src="./files.js?v=20260930-2"></script><script defer src="./app.js?v=20260930-5"></script>
+</head>
+<body><main>
+<div class="page-heading"><h1>기업 설명회 일정</h1></div>
+<section class="card">
+<div class="section-head"><h2>신청 명단</h2><button id="template" class="text-button">엑셀 양식 받기 ↓</button></div>
+<label class="dropzone" id="dropzone" for="file"><input type="file" id="file" accept=".xlsx"><span class="file-button">엑셀 파일 선택</span><span id="filename">선택한 파일 없음</span></label>
+<div class="company-file-row"><label class="file-button" for="company-file">기업시간표 선택<input type="file" id="company-file" accept=".xlsx,.json"></label><span id="company-filename">선택한 시간표 없음</span><button id="company-template" class="text-button">시간표 양식 ↓</button></div>
+<div class="settings-heading"><button id="toggle-settings" class="text-button" aria-expanded="false" aria-controls="settings">기업시간표 확인·수정 ▾</button><span>타임당 최대 10명</span></div>
+<div id="settings" hidden><div class="table-scroll"><table><thead><tr><th>기업</th><th>구분</th><th>09:30</th><th>10:30</th><th>13:10</th><th>14:10</th><th>15:10</th></tr></thead><tbody id="company-settings"></tbody></table></div><button id="schedule-save" class="text-button" hidden>수정한 시간표 엑셀 저장 ↓</button></div>
+<div id="time-warnings" class="time-warnings" role="status" hidden></div>
+<div id="error" role="alert" hidden></div>
+<button id="generate" class="primary-button">일정 만들기</button>
+<div id="progress" role="status" hidden><span class="spinner"></span><span id="progress-text">일정을 만드는 중…</span><button id="cancel" class="text-button">취소</button></div>
+</section>
+<section id="results" hidden>
+<div class="result-heading"><div><h2>배정 결과</h2><p id="result-summary"></p></div><button id="download" class="primary-button">결과 파일 받기 ↓</button></div>
+<p id="solver-note" hidden></p>
+<div id="matching-rates" class="matching-rates" role="region" aria-label="매니저 및 기업별 할당률"></div>
+<div class="results-toolbar"><div class="tabs" aria-label="결과 구분"><button class="selected" data-tab="managers">매니저별 일정</button><button data-tab="companies">기업별 참석자</button><button data-tab="unassigned">미배정</button></div><input id="search" type="search" placeholder="이름 · 소속기관 · 기업 검색" aria-label="결과 검색"></div>
+<div id="result-body"></div>
+</section>
+<noscript>이 페이지를 사용하려면 브라우저에서 JavaScript를 허용해 주세요.</noscript>
+</main></body></html>
